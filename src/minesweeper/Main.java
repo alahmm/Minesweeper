@@ -180,14 +180,21 @@ public class Main {
         return matrix;
     }
     public static void printer(char[][] matrix) {
-        for (char[] array : matrix
-             ) {
-            for (char variable : array
-                 ) {
-                System.out.print(variable);
+        System.out.println(" |123456789|\n" +
+                "-|---------|");
+        for (int i = 0; i < 9; i++) {
+            System.out.print(i + 1 +"|");
+            for (int j = 0; j < 9; j++) {
+                if (matrix[i][j] != 'X') {
+                    System.out.print(matrix[i][j]);
+                    } else {
+                    System.out.print('.');
+                }
             }
+            System.out.print("|");
             System.out.println();
         }
+        System.out.println("-|---------|");
     }
     public static int counterX(char[][] matrix) {
         int counterX = 0;
@@ -203,16 +210,39 @@ public class Main {
         return counterX;
     }
     public static void main(String[] args) {
-
+        int counterStar = 0;
         char[][] matrixOfMines = new char[9][9];
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 matrixOfMines[i][j] = '.';
             }
         }
+        System.out.print("How many mines do you want on the field?");
         Scanner scanner = new Scanner(System.in);
         int numberOfMines = scanner.nextInt();
-        printer(minesaround(minesprovider(matrixOfMines, numberOfMines)));
+        minesaround(minesprovider(matrixOfMines, numberOfMines));
+        printer(matrixOfMines);
+        while (true) {
+            System.out.print("Set/delete mines marks (x and y coordinates): >");
+            int y = scanner.nextInt();
+            int x = scanner.nextInt();
+            if (matrixOfMines[x - 1][y - 1] == 'X' || matrixOfMines[x - 1][y - 1] == '.') {
+                if (matrixOfMines[x - 1][y - 1] == 'X') {
+                    counterStar ++;
+                }
+                matrixOfMines[x - 1][y - 1] = '*';
+                printer(matrixOfMines);
+            } else if (matrixOfMines[x - 1][y - 1] == '*'){
+                matrixOfMines[x - 1][y - 1] = '.';
+                printer(matrixOfMines);
+            }else {
+                System.out.println("There is a number here!");
+            }
+            if (counterStar == numberOfMines) {
+                System.out.println("Congratulations! You found all the mines!");
+                return;
+            }
+        }
 
     }
 }
