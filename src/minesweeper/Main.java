@@ -301,332 +301,10 @@ public class Main {
                     if (counterX != 0) {
                         char var = (char) (counterX + 48);
                         matrix[i][j] = var;
+/*                    } else {
+                        matrix[i][j] = '/';
+                    }*/
                         counterX = 0;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
-        return matrix;
-    }
-/*    public static char[][] NumbersRemover(char[][] matrix) {
-        try {
-            int counterX = 0;
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    if (matrix[i][j] != '.' && matrix[i][j] != '/') {
-                        *//**
-                         * in the corner
-                         *//*
-                        if (i == 0 && j == 0) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (i == 0 && j == 8) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-
-                        } else if (i == 8 && j == 0) {
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (i == 8 && j == 8) {
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                        }
-                        *//**
-                         * on the side
-                         *//*
-                        else if (j == 0) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (j == 8) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (i == 0) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (i == 8) {
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                        }
-                        *//**
-                         * middel
-                         *//*
-                        else {
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                        }
-
-                    }
-                    if (counterX == 0) {
-
-                            matrix[i][j] = '.';
-
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
-        return matrix;
-    }*/
-    public static char[][] NumbersRemover(char[][] matrix, int x, int y) {
-        try {
-            int counterX = 0;
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    if (matrix[i][j] != '.' && matrix[i][j] != '/') {
-                        /**
-                         * in the corner
-                         */
-                        if (i == 0 && j == 0) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (i == 0 && j == 8) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-
-                        } else if (i == 8 && j == 0) {
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (i == 8 && j == 8) {
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                        }
-                        /**
-                         * on the side
-                         */
-                        else if (j == 0) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (j == 8) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (i == 0) {
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                        } else if (i == 8) {
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                        }
-                        /**
-                         * middel
-                         */
-                        else {
-                            if (matrix[i - 1][j] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i - 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j + 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j - 1] == '/') {
-                                counterX ++;
-                            }
-                            if (matrix[i + 1][j] == '/') {
-                                counterX ++;
-                            }
-                        }
-
-                    }
-                    if (counterX == 0) {
-                        if (i != x && j != y) {
-                            matrix[i][j] = '.';
-                        }
-
                     }
                 }
             }
@@ -657,6 +335,19 @@ public class Main {
                 } else {
                     System.out.print('.');
                 }
+            }
+            System.out.print("|");
+            System.out.println();
+        }
+        System.out.println("-|---------|");
+    }
+    public static void printerLoss(char[][] matrix) {
+        System.out.println(" |123456789|\n" +
+                "-|---------|");
+        for (int i = 0; i < 9; i++) {
+            System.out.print(i + 1 +"|");
+            for (int j = 0; j < 9; j++) {
+                    System.out.print(matrix[i][j]);
             }
             System.out.print("|");
             System.out.println();
@@ -697,15 +388,14 @@ public class Main {
         }
         return counterX;
     }
-    public static void around(char[][] matrixOfPositions, int x, int y) {
-
-    }
     public static void main(String[] args) {
         int counterStar = 0;
         char[][] matrixOfMines = new char[9][9];
+        char[][] matrixOfMinesEach = new char[9][9];
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 matrixOfMines[i][j] = '.';
+                matrixOfMinesEach[i][j] = '.';
             }
         }
         System.out.print("How many mines do you want on the field?");
@@ -737,16 +427,19 @@ public class Main {
                 }
             } else if (mode.equals("free")) {
                 if (matrixOfMines[x - 1][y - 1] == 'X') {
+                    printerLoss(matrixOfMines);
                     System.out.println("You stepped on a mine and failed!");
                     return;
                 } else {
                     NoMinesAround(matrixOfMines, 'X', - 1, - 1);
                     minesaround(matrixOfMines);
                     if (matrixOfMines[x - 1][y -1] == '/') {
-                        NoMinesAround(matrixOfMines, '/', - 1, - 1);
+                        NoMinesAround(matrixOfMines, '/', x- 1, y- 1);
                         //NumbersRemover(matrixOfMines);
                         printer(matrixOfMines);
                     } else {
+                        matrixOfMinesEach[x - 1][y - 1] = matrixOfMines[x - 1][y - 1];
+                        printerLoss(matrixOfMinesEach);
                         //printer(matrixOfMines, x - 1, y - 1);
 
                         NoMinesAround(matrixOfMines, '/', x - 1, y - 1);
