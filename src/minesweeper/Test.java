@@ -65,22 +65,66 @@ public class Test {
     }
     public static char[][] howManyXAroundNext(char[][] matrixOfPositions, int x, int y, Coordinates coordinates) {
         ManyXAround(matrixOfPositions, coordinates, x, y);
+        for (int i = coordinates.startI; i <= coordinates.endI; i++) {
+            for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
+                {
+                    if (i != x || j != y) {
+                        if (matrixOfPositions[i][j] == '/') {
+                            ManyXAround(matrixOfPositions, determinerOfStartEnd(i, j), i, j);
+                        }
+                    }
+                }}
+
+        //ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x, y), y, coordinates), x, coordinates);
+/*        if (x < 8) {
+            if (matrixOfPositions[x + 1][y] == '/') {
+                ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x + 1, y), y, coordinates), x + 1, coordinates);
+            }
+        }
+        if (x > 0) {
+            if (matrixOfPositions[x - 1][y] == '/') {
+                ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x - 1, y), y, coordinates), x - 1, coordinates);
+            }
+        }
+        if (y < 8) {
+            if (matrixOfPositions[x][y + 1] == '/') {
+                ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x, y + 1), y + 1, coordinates), x, coordinates);
+            }
+        }
+        if (y > 0) {
+            if (matrixOfPositions[x][y - 1] == '/') {
+                ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x, y - 1), y - 1, coordinates), x, coordinates);
+            }
+        }*/
+/*        for (int i = coordinates.startI; i <= coordinates.endI; i++) {
+            if ( matrixOfPositions[i][y] == '/') {
+                howManyXAroundNext(matrixOfPositions, i, y, determinerOfStartEnd(i, y));
+            }
+        }
+        for (int j = coordinates.startJ; j <= coordinates.endJ; j++) {
+            if (matrixOfPositions[x][j] == '/') {
+                howManyXAroundNext(matrixOfPositions, x, j, determinerOfStartEnd(x, j));
+            }
+        }*/
+/*        int tempX = x;
+        int tempY = y;
         if (x < 8 && matrixOfPositions[x + 1][y] == '/') {
             coordinates = determinerOfStartEnd(x + 1, y);
             for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
                 for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
                     if (matrixOfPositions[i][j] == '.') {
-                        howManyXAroundMore(matrixOfPositions, x + 1, y, determinerOfStartEnd(x + 1, y));
+                        howManyXAroundNext(matrixOfPositions, x + 1, y, determinerOfStartEnd(x + 1, y));
                     }
                 }
             }
             }
+        x = tempX;
             if (x > 0 && matrixOfPositions[x - 1][y] == '/') {
                 coordinates = determinerOfStartEnd(x - 1, y);
                 for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
                     for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
                         if (matrixOfPositions[i][j] == '.') {
-                            howManyXAroundMore(matrixOfPositions, x - 1, y, determinerOfStartEnd(x - 1, y));
+                            howManyXAroundNext(matrixOfPositions, x - 1, y, determinerOfStartEnd(x - 1, y));
                         }
                     }
                 }
@@ -90,27 +134,46 @@ public class Test {
                 for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
                     for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
                         if (matrixOfPositions[i][j] == '.') {
-                            howManyXAroundMore(matrixOfPositions, x, y + 1, determinerOfStartEnd(x, y + 1));
+                            howManyXAroundNext(matrixOfPositions, x, y + 1, determinerOfStartEnd(x, y + 1));
                         }
                     }
                 }
             }
+            y = tempY;
             if (y > 0 && matrixOfPositions[x][y - 1] == '/') {
                 coordinates = determinerOfStartEnd(x, y - 1);
                 for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
                     for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
                         if (matrixOfPositions[i][j] == '.') {
-                            howManyXAroundMore(matrixOfPositions, x, y - 1, determinerOfStartEnd(x, y - 1));
+                            howManyXAroundNext(matrixOfPositions, x, y - 1, determinerOfStartEnd(x, y - 1));
                         }
                     }
                 }
-            }
+            }*/
 
+        return matrixOfPositions;
+    }
+    public static char[][] ControllerY(char[][] matrixOfPositions, int y, Coordinates coordinates) {
+        for (int i = coordinates.startI; i <= coordinates.endI; i++) {
+            if ( matrixOfPositions[i][y] == '/') {
+                ManyXAround(matrixOfPositions, determinerOfStartEnd(i, y), i, y);
+            }
+        }
+        return matrixOfPositions;
+    }
+    public static char[][] ControllerX(char[][] matrixOfPositions, int x, Coordinates coordinates) {
+        for (int j = coordinates.startJ; j <= coordinates.endJ; j++) {
+            if (matrixOfPositions[x][j] == '/') {
+                ManyXAround(matrixOfPositions, determinerOfStartEnd(x, j), x, j);
+            }
+        }
         return matrixOfPositions;
     }
     public static void main(String[] args) {
         int counterSymbol = 0;
         int counterStar = 0;
+        int counterPoint = 9 * 9;
+        int counterNonPoint = 0;
         char[][] matrixOfMines = new char[9][9];
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -131,11 +194,13 @@ public class Test {
                 if (matrixOfMines[x - 1][y - 1] == 'X' || matrixOfMines[x - 1][y - 1] == '.') {
                     if (matrixOfMines[x - 1][y - 1] == 'X') {
                         counterStar ++;
+                        counterPoint --;
                     }
                     matrixOfMines[x - 1][y - 1] = '*';
                     printer(matrixOfMines);
                 } else if (matrixOfMines[x - 1][y - 1] == '*'){
                     matrixOfMines[x - 1][y - 1] = '.';
+                    counterPoint ++;
                     printer(matrixOfMines);
                 }else {
                     System.out.println("There is a number here!");
@@ -150,17 +215,35 @@ public class Test {
                     System.out.println("You stepped on a mine and failed!");
                     return;
                 } else {
+                    if (counterPoint == numberOfMines) {
+                        printer(matrixOfMines);
+                        System.out.println("Congratulations! You found all the mines!");
+                        return;
+                    }
                     char var = howManyXAround(matrixOfMines, x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1))[x - 1][y - 1];
                     if ( var != '/') {
                         matrixOfMines[x - 1][y - 1] = var;
+                        counterPoint --;
                         printer(matrixOfMines);
                     } else {
                         if (counterSymbol == 0) {
                             howManyXAroundNext(matrixOfMines, x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
+
+                            for (char[] array : matrixOfMines
+                                 ) {
+                                for (char variable : array
+                                     ) {
+                                    if (variable != '.') {
+                                        counterNonPoint ++;
+                                    }
+                                }
+                            }
+                            counterPoint -= counterNonPoint;
                             printer(matrixOfMines);
                             counterSymbol ++;
                         } else {
                             howManyXAround(matrixOfMines, x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
+                            counterPoint --;
                             printer(matrixOfMines);
                         }
 
