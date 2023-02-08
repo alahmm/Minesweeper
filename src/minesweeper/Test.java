@@ -32,9 +32,6 @@ public class Test {
         }
         return new Coordinates(startI, startJ, endI, endJ);
     }
-    public static boolean isXAround(char[][] matrixOfPositions, int x, int y, Coordinates coordinates) {
-        return howManyXAround(matrixOfPositions, x, y, coordinates)[x][y] != '/';
-    }
     public static char[][] howManyXAround(char[][] matrixOfPositions, int x, int y, Coordinates coordinates) {
         int counterX = 0;
         if (matrixOfPositions[x][y] == '.') {
@@ -66,18 +63,8 @@ public class Test {
         }
         return matrixOfPositions;
     }
-    public static char[][] howManyXAroundMore(char[][] matrixOfPositions, int x, int y, Coordinates coordinates) {
+    public static char[][] howManyXAroundNext(char[][] matrixOfPositions, int x, int y, Coordinates coordinates) {
         ManyXAround(matrixOfPositions, coordinates, x, y);
-/*        for (int i = coordinates.startI; i <= coordinates.endI; i++) {
-            if (i != x && matrixOfPositions[i][y] == '/') {
-                howManyXAroundMore(matrixOfPositions, i, y, determinerOfStartEnd(i, y));
-            }
-        }
-        for (int j = coordinates.startJ; j <= coordinates.endJ; j++) {
-            if (j != y && matrixOfPositions[x][j] == '/') {
-                howManyXAroundMore(matrixOfPositions, x, j, determinerOfStartEnd(x, j));
-            }
-        }*/
         if (x < 8 && matrixOfPositions[x + 1][y] == '/') {
             coordinates = determinerOfStartEnd(x + 1, y);
             for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
@@ -169,7 +156,7 @@ public class Test {
                         printer(matrixOfMines);
                     } else {
                         if (counterSymbol == 0) {
-                            howManyXAroundMore(matrixOfMines, x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
+                            howManyXAroundNext(matrixOfMines, x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
                             printer(matrixOfMines);
                             counterSymbol ++;
                         } else {
