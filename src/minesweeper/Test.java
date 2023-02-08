@@ -66,91 +66,16 @@ public class Test {
     public static char[][] howManyXAroundNext(char[][] matrixOfPositions, int x, int y, Coordinates coordinates) {
         ManyXAround(matrixOfPositions, coordinates, x, y);
         for (int i = coordinates.startI; i <= coordinates.endI; i++) {
-            for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
+            for (int j = coordinates.startJ; j <= coordinates.endJ; j++) {
                 {
                     if (i != x || j != y) {
                         if (matrixOfPositions[i][j] == '/') {
                             ManyXAround(matrixOfPositions, determinerOfStartEnd(i, j), i, j);
                         }
                     }
-                }}
-
-        //ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x, y), y, coordinates), x, coordinates);
-/*        if (x < 8) {
-            if (matrixOfPositions[x + 1][y] == '/') {
-                ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x + 1, y), y, coordinates), x + 1, coordinates);
-            }
-        }
-        if (x > 0) {
-            if (matrixOfPositions[x - 1][y] == '/') {
-                ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x - 1, y), y, coordinates), x - 1, coordinates);
-            }
-        }
-        if (y < 8) {
-            if (matrixOfPositions[x][y + 1] == '/') {
-                ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x, y + 1), y + 1, coordinates), x, coordinates);
-            }
-        }
-        if (y > 0) {
-            if (matrixOfPositions[x][y - 1] == '/') {
-                ControllerX(ControllerY(ManyXAround(matrixOfPositions, coordinates, x, y - 1), y - 1, coordinates), x, coordinates);
-            }
-        }*/
-/*        for (int i = coordinates.startI; i <= coordinates.endI; i++) {
-            if ( matrixOfPositions[i][y] == '/') {
-                howManyXAroundNext(matrixOfPositions, i, y, determinerOfStartEnd(i, y));
-            }
-        }
-        for (int j = coordinates.startJ; j <= coordinates.endJ; j++) {
-            if (matrixOfPositions[x][j] == '/') {
-                howManyXAroundNext(matrixOfPositions, x, j, determinerOfStartEnd(x, j));
-            }
-        }*/
-/*        int tempX = x;
-        int tempY = y;
-        if (x < 8 && matrixOfPositions[x + 1][y] == '/') {
-            coordinates = determinerOfStartEnd(x + 1, y);
-            for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
-                for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
-                    if (matrixOfPositions[i][j] == '.') {
-                        howManyXAroundNext(matrixOfPositions, x + 1, y, determinerOfStartEnd(x + 1, y));
-                    }
                 }
             }
-            }
-        x = tempX;
-            if (x > 0 && matrixOfPositions[x - 1][y] == '/') {
-                coordinates = determinerOfStartEnd(x - 1, y);
-                for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
-                    for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
-                        if (matrixOfPositions[i][j] == '.') {
-                            howManyXAroundNext(matrixOfPositions, x - 1, y, determinerOfStartEnd(x - 1, y));
-                        }
-                    }
-                }
-            }
-            if (y < 8 && matrixOfPositions[x][y + 1] == '/') {
-                coordinates = determinerOfStartEnd(x , y + 1);
-                for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
-                    for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
-                        if (matrixOfPositions[i][j] == '.') {
-                            howManyXAroundNext(matrixOfPositions, x, y + 1, determinerOfStartEnd(x, y + 1));
-                        }
-                    }
-                }
-            }
-            y = tempY;
-            if (y > 0 && matrixOfPositions[x][y - 1] == '/') {
-                coordinates = determinerOfStartEnd(x, y - 1);
-                for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
-                    for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
-                        if (matrixOfPositions[i][j] == '.') {
-                            howManyXAroundNext(matrixOfPositions, x, y - 1, determinerOfStartEnd(x, y - 1));
-                        }
-                    }
-                }
-            }*/
-
+        }
         return matrixOfPositions;
     }
     public static char[][] ControllerY(char[][] matrixOfPositions, int y, Coordinates coordinates) {
