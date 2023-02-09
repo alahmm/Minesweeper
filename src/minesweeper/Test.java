@@ -64,7 +64,12 @@ public class Test {
         return matrixOfPositions;
     }
     public static char[][] howManyXAroundNext(char[][] matrixOfPositions, int x, int y, Coordinates coordinates) {
-        ManyXAround(matrixOfPositions, coordinates, x, y);
+        char[][] newMatrix = new char[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                newMatrix[i][j] =matrixOfPositions[i][j];
+            }
+        }
         for (int i = coordinates.startI; i <= coordinates.endI; i++) {
             for (int j = coordinates.startJ; j <= coordinates.endJ; j++) {
                 {
@@ -76,21 +81,33 @@ public class Test {
                 }
             }
         }
-        return matrixOfPositions;
-    }
-    public static char[][] ControllerY(char[][] matrixOfPositions, int y, Coordinates coordinates) {
-        for (int i = coordinates.startI; i <= coordinates.endI; i++) {
-            if ( matrixOfPositions[i][y] == '/') {
-                ManyXAround(matrixOfPositions, determinerOfStartEnd(i, y), i, y);
+        coordinates.startI --;
+        coordinates.startJ --;
+        coordinates.endI ++;
+        coordinates.endJ ++;
+        if (coordinates.startI < 0) {
+            coordinates.startI = 0;
+        }
+        if (coordinates.startJ < 0) {
+            coordinates.startJ = 0;
+        }
+        if (coordinates.endI > 8) {
+            coordinates.endI = 8;
+        }
+        if (coordinates.endJ > 8) {
+            coordinates.endJ = 8;
+        }
+        coordinates = new Coordinates(coordinates.startI, coordinates.startJ, coordinates.endI, coordinates.endJ);
+        boolean isNotSame = false;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (matrixOfPositions[i][j] != newMatrix[i][j]) {
+                    isNotSame = true;
+                }
             }
         }
-        return matrixOfPositions;
-    }
-    public static char[][] ControllerX(char[][] matrixOfPositions, int x, Coordinates coordinates) {
-        for (int j = coordinates.startJ; j <= coordinates.endJ; j++) {
-            if (matrixOfPositions[x][j] == '/') {
-                ManyXAround(matrixOfPositions, determinerOfStartEnd(x, j), x, j);
-            }
+        if (isNotSame) {
+            howManyXAroundNext(matrixOfPositions, x, y, coordinates);
         }
         return matrixOfPositions;
     }
@@ -152,7 +169,7 @@ public class Test {
                         printer(matrixOfMines);
                     } else {
                         if (counterSymbol == 0) {
-                            howManyXAroundNext(matrixOfMines, x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
+                            howManyXAroundNext(ManyXAround(matrixOfMines, determinerOfStartEnd(x - 1, y - 1), x - 1, y - 1), x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
 
                             for (char[] array : matrixOfMines
                                  ) {
