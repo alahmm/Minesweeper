@@ -3,6 +3,7 @@ package minesweeper;
 import java.util.Scanner;
 
 import static minesweeper.Main.*;
+import static minesweeper.Main.printerLoss;
 
 public class Test {
     static class Coordinates {
@@ -34,29 +35,29 @@ public class Test {
     }
     public static char[][] howManyXAround(char[][] matrixOfPositions, int x, int y, Coordinates coordinates) {
         int counterX = 0;
-        if (matrixOfPositions[x][y] == '.') {
-            for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
-                for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
-                    if (i != x || j != y) {
-                        if (matrixOfPositions[i][j] == 'X') {
-                            counterX ++;
-                        }
+
+        for (int i = coordinates.startI; i <= coordinates.endI ; i++) {
+            for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
+                if (i != x || j != y) {
+                    if (matrixOfPositions[i][j] == 'X') {
+                        counterX ++;
                     }
                 }
             }
-            if (counterX != 0) {
-                char var = (char) (counterX + 48);
-                matrixOfPositions[x][y] = var;
-            } else {
-                matrixOfPositions[x][y] = '/';
-            }
         }
+        if (counterX != 0) {
+            char var = (char) (counterX + 48);
+            matrixOfPositions[x][y] = var;
+        } else {
+            matrixOfPositions[x][y] = '/';
+        }
+
         return matrixOfPositions;
     }
     public static char[][] ManyXAround(char[][] matrixOfPositions, Coordinates coordinates, int x, int y) {
         for (int i = coordinates.startI; i <= coordinates.endI; i++) {
             for (int j = coordinates.startJ; j <= coordinates.endJ ; j++) {
-                 {
+                {
                     howManyXAround(matrixOfPositions, i, j, determinerOfStartEnd(i, j));
                 }
             }
@@ -112,7 +113,6 @@ public class Test {
         return matrixOfPositions;
     }
     public static void main(String[] args) {
-        int counterSymbol = 0;
         int counterStar = 0;
         int counterPoint = 9 * 9;
         int counterNonPoint = 0;
@@ -162,43 +162,45 @@ public class Test {
                         matrixOfMines[x - 1][y - 1] = var;
                         counterPoint --;
                         printer(matrixOfMines);
-                        if (counterPoint == 0) {
-                            printer(matrixOfMines);
-                            System.out.println("Congratulations! You found all the mines!");
-                            return;
-                        }
                     } else {
-                        if (counterSymbol == 0) {
-                            howManyXAroundNext(ManyXAround(matrixOfMines, determinerOfStartEnd(x - 1, y - 1), x - 1, y - 1), x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
+                        howManyXAroundNext(ManyXAround(matrixOfMines, determinerOfStartEnd(x - 1, y - 1), x - 1, y - 1), x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
 
-                            for (char[] array : matrixOfMines
-                                 ) {
-                                for (char variable : array
-                                     ) {
-                                    if (variable != '.') {
-                                        counterNonPoint ++;
+                        for (char[] array : matrixOfMines
+                        ) {
+                            for (char variable : array
+                            ) {
+                                if (variable != '.') {
+                                    counterNonPoint ++;
+                                }
+                            }
+                        }
+                        counterPoint -= counterNonPoint;
+                        printer(matrixOfMines);
+                    }
+                    for (int i = 0; i < 9; i++) {
+                        for (int j = 0; j < 9; j++) {
+                            if (matrixOfMines[i][j] == '*') {
+                                Coordinates coordinates = determinerOfStartEnd(i, j);
+                                for (int k = coordinates.startI; k <= coordinates.endI; k++) {
+                                    for (int l = coordinates.startJ; l <= coordinates.endJ ; l++) {
+                                        if (matrixOfMines[k][l] == '/') {
+                                            matrixOfMines[i][j] = howManyXAround(matrixOfMines, i, j, coordinates)[i][j];
+                                        }
                                     }
                                 }
                             }
-                            counterPoint -= counterNonPoint;
-                            printer(matrixOfMines);
-                            counterSymbol ++;
-                        } else {
-                            howManyXAround(matrixOfMines, x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
-                            counterPoint --;
-                            printer(matrixOfMines);
                         }
-                        if (counterPoint == 0) {
-                            printer(matrixOfMines);
-                            System.out.println("Congratulations! You found all the mines!");
-                            return;
-                        }
+                    }
+                    if (counterPoint == 0) {
+                        printer(matrixOfMines);
+                        System.out.println("Congratulations! You found all the mines!");
+                        return;
                     }
                 }
 
-                }
             }
-
         }
 
     }
+
+}
