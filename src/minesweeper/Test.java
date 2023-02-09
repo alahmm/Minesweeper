@@ -157,16 +157,16 @@ public class Test {
                     System.out.println("You stepped on a mine and failed!");
                     return;
                 } else {
-                    if (counterPoint == numberOfMines) {
-                        printer(matrixOfMines);
-                        System.out.println("Congratulations! You found all the mines!");
-                        return;
-                    }
                     char var = howManyXAround(matrixOfMines, x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1))[x - 1][y - 1];
                     if ( var != '/') {
                         matrixOfMines[x - 1][y - 1] = var;
                         counterPoint --;
                         printer(matrixOfMines);
+                        if (counterPoint == 0) {
+                            printer(matrixOfMines);
+                            System.out.println("Congratulations! You found all the mines!");
+                            return;
+                        }
                     } else {
                         if (counterSymbol == 0) {
                             howManyXAroundNext(ManyXAround(matrixOfMines, determinerOfStartEnd(x - 1, y - 1), x - 1, y - 1), x - 1, y - 1, determinerOfStartEnd(x - 1, y - 1));
@@ -188,7 +188,11 @@ public class Test {
                             counterPoint --;
                             printer(matrixOfMines);
                         }
-
+                        if (counterPoint == 0) {
+                            printer(matrixOfMines);
+                            System.out.println("Congratulations! You found all the mines!");
+                            return;
+                        }
                     }
                 }
 
